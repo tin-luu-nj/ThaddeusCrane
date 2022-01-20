@@ -1,0 +1,25 @@
+bot:
+  notification:
+    discord:
+      token: OTMxODA5OTE0NTU5NTMzMDk2.YeJ1mw.4CtZejjjcmA6ZYTBf7gpJMDWoZM
+      guild: TheNest
+  webscraper:
+    manga-feed:
+      discord-channel: manga-feed
+      url: https://manga4life.com/
+      timeout: 3
+      login:
+        extension:
+        element:
+        - type: text-field
+          by: XPATH
+          element: //div[@class="container MainContainer"]//input[@type="email"]
+          value: trongtin96@gmail.com
+        - type: text-field
+          by: XPATH
+          element: //div[@class="container MainContainer"]//input[@type="password"]
+          value: SHERlocked@manga4life.19
+        - type: click
+          by: XPATH
+          element: //div[@class="container MainContainer"]//button
+          value:

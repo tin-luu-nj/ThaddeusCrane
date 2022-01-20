@@ -1,0 +1,6 @@
+discord:
+  bot:
+    token: TOKEN
+    guild: GUILD
+
+# END OF FILE

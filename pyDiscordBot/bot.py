@@ -6,13 +6,12 @@ from disnake.ext import commands
 from disnake.utils import get as dGet
 
 env = extern.gConfig
-TOKEN = env['bot']['notification']['discord']['token']
-GUILD = env['bot']['notification']['discord']['guild']
+TOKEN = env['discord']['bot']['token']
+GUILD = env['discord']['bot']['guild']
 
 class clsBot(commands.Bot):
   def __init__(self):
     super().__init__(command_prefix='!',
-                    #  test_guilds=[841707468928581642],
                      sync_commands=True)
     self.load_extension("pyDiscordBot.Cogs.cmdCog")
     self.load_extension("pyDiscordBot.Cogs.listenerCog")

@@ -7,7 +7,7 @@ sys.tracebacklimit = 0
 
 # Global Variable Initialization
 from pyExtern import extern
-with open('./Alfred.yml', 'r') as stream:
+with open('./config/Alfred.yml', 'r') as stream:
   extern.gConfig = yaml.load(stream, Loader=yaml.CLoader)
 
 # Custom Library

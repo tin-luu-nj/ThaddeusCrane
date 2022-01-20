@@ -18,21 +18,19 @@ Alfred = DiscordBot()
 
 # Main Function
 def main():
-  loop = asyncio.get_event_loop()
   try:
-    asyncio.ensure_future(notiInject_1())
-    asyncio.ensure_future(notiInject_2())
-    asyncio.ensure_future(notiInject_3())
-    asyncio.ensure_future(loopNotificationCheck())
-    # Ensure Discord bot always invokes last
-    asyncio.ensure_future(Alfred.PermanentStart())
-    loop.run_forever()
+    Alfred.loop.create_task(notiInject_1())
+    Alfred.loop.create_task(notiInject_2())
+    Alfred.loop.create_task(notiInject_3())
+    Alfred.loop.create_task(loopNotificationCheck())
+    Alfred.PermanentStart()
   except KeyboardInterrupt:
     pass
   finally:
     notificationCleanup()
     print("[INF] Closing Loop")
-    loop.close()
+    Alfred.loop.close()
+    # loop.close()
 
 async def notiInject_1():
   while True:

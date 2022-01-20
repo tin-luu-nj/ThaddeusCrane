@@ -15,7 +15,6 @@ class clsBot(commands.Bot):
                     #  test_guilds=[841707468928581642],
                      sync_commands=True)
     self.load_extension("pyDiscordBot.Cogs.cmdCog")
-    self.load_extension("pyDiscordBot.Cogs.slashCmdCog")
     self.load_extension("pyDiscordBot.Cogs.listenerCog")
     self.loop.create_task(self.__continuousNotify())
     self.loop.create_task(self.__continuousValidate())

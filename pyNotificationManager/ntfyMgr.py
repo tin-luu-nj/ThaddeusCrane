@@ -70,7 +70,7 @@ async def notificationInject(channel, message):
     notif = extern.DiscordWaitingMsg
     # Create empty list if channel not exist yet
     if not channel in notif:
-      notif[channel].clear()
+      notif[channel] = []
     # Append msg to channel waiting list
     notif[channel].append(message)
 

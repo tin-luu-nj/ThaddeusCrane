@@ -6,7 +6,7 @@
     {
       "label": "test",
       "type": "shell",
-      "command": "python test.py"
+      "command": "python App.py"
     }
   ]
 }

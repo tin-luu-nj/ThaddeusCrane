@@ -70,7 +70,7 @@ async def notificationInject(channel, message):
     notif = extern.DiscordWaitingMsg
     # Create empty list if channel not exist yet
     if not channel in notif:
-      notif[channel] = []
+      notif[channel].clear()
     # Append msg to channel waiting list
     notif[channel].append(message)
 
@@ -88,7 +88,7 @@ def notificationCleanup():
       # Remove transmitted messages in delivering file
       ntfy[chnlNm] = list(set(ntfy[chnlNm])^set(common))
       # Reset validated message
-      extern.DiscordDeliveredMsg = []
+      extern.DiscordDeliveredMsg.clear()
     remainingMsg = dict(ntfy)
   else:
     pass
@@ -99,12 +99,18 @@ def notificationCleanup():
         for msg in waitingMsg[chnl]:
           remainingMsg[chnl].append(msg)
       else:
-        remainingMsg[chnl] = []
+        remainingMsg[chnl].clear()
   else:
     pass
 
   if remainingMsg:
     with open('./notification/leftover.yml', 'w') as stream:
       yaml.dump(remainingMsg, stream, default_flow_style=False)
+  else:
+    pass
+
+  if extern.gMangaFeed:
+    with open('./notification/manga-feed.yml', 'w') as stream:
+      yaml.dump(extern.gMangaFeed, stream, default_flow_style=False)
   else:
     pass

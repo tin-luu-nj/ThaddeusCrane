@@ -1,1 +1,2 @@
-selenium==3.141.0
+disnake==2.3.0
+PyYAML==6.0

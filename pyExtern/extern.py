@@ -25,4 +25,7 @@ injectLock  = asyncio.Lock()
 # counter
 i = 0
 
+# Manga Subscription Feed
+gMangaFeed = {}
+
 # END OF FILE

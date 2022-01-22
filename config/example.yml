@@ -1,0 +1,6 @@
+webscraper:
+  manga-feed:
+    EmailAddress: user@domain
+    Password: password
+
+# END OF FILE

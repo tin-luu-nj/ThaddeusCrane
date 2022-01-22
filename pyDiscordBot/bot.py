@@ -83,7 +83,7 @@ class clsBot(commands.Bot):
               # Remove transmitted messages in delivering file
               ntfy[chnlNm] = list(set(ntfy[chnlNm])^set(common))
               # Reset validated message
-              extern.DiscordDeliveredMsg = []
+              extern.DiscordDeliveredMsg.clear()
             pass
           else:
             pass

@@ -1,4 +1,6 @@
-import datetime, json, re
+import datetime, json, re, yaml
+from os.path import exists
+from os import remove
 from requests import Session
 from bs4 import BeautifulSoup
 
@@ -7,6 +9,12 @@ from pyExtern import extern
 class clsMangaFeed(Session):
   def __init__(self) -> None:
     super().__init__()
+    if exists('./notification/manga-feed.yml'):
+      with open('./notification/manga-feed.yml', 'r') as stream:
+        extern.gMangaFeed = yaml.load(stream, Loader=yaml.CLoader)
+      remove('./notification/manga-feed.yml')
+    else:
+      pass
     self.logged = False
     self.__login()
 
@@ -20,7 +28,7 @@ class clsMangaFeed(Session):
     else:
       self.logged = False
 
-  def checkFeed(self):
+  async def checkFeed(self):
     if self.logged:
       _url = 'https://manga4life.com/feed.php'
       soup = BeautifulSoup(self.get(_url).content, "html.parser")
@@ -32,7 +40,7 @@ class clsMangaFeed(Session):
       _url  = 'https://manga4life.com/read-online/'
       today = str(datetime.datetime.today().date())
 
-      if not extern.gMangaFeed[str(today)]:
+      if not str(today) in extern.gMangaFeed:
         extern.gMangaFeed = {}
         extern.gMangaFeed[str(today)] = {}
         extern.gMangaFeed[str(today)]['new'] = []

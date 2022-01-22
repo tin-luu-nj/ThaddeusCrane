@@ -1,0 +1,1 @@
+from .mangaFeed import clsMangaFeed as MangaFeed

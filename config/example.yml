@@ -1,3 +1,7 @@
+discord:
+  bot:
+    token: TOKEN
+    guild: GUILD
 webscraper:
   manga-feed:
     EmailAddress: user@domain

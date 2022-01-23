@@ -1,10 +1,57 @@
+### @brief Example Configuration for Application ###
+
+################################################################################
+# @file example.yml
+#
+# @brief This file describes the example setting to be used by the application.
+#
+# @section Description
+# Defines example setting to be used by the application
+# - Discord Bot
+# - Manga Feed
+#
+# @section Libraries/Modules
+# - None
+#
+# @section NOTE
+# - This is an example setting, replace by user information
+#
+# @section TODO
+# - None
+#
+# @section Change History
+# Example description:
+# Version Y-M-D       Author      Change description
+# 1.0.0   2022-01-22  Tin Luu     Initial Version
+#
+# Copyright (c) 2022 Pennyworth Project.  All rights reserved.
+################################################################################
+
+# Setting for Discord Bot
+# - discord.bot.token: Token of Discord Bot
+# - discord.bot.guild: Guild that Discord Bot can access
 discord:
   bot:
     token: TOKEN
     guild: GUILD
+
+# Setting for Web Scraper
+# - webscraper.manga-feed.url.home-page:   homepage url
+# - webscraper.manga-feed.url.login-page:  path to login page
+# - webscraper.manga-feed.url.feed-page:   path to feed page
+# - webscraper.manga-feed.url.read-online: path to read-online page
+# - webscraper.manga-feed.login-payload:   login information
 webscraper:
   manga-feed:
-    EmailAddress: user@domain
-    Password: password
+    url:
+      home-page:   domain
+      login-page:  extension-of-login-page
+      feed-page:   extension-of-feed-page
+      read-online: extension-of-read-online
+    login-payload:
+      EmailAddress: user@domain
+      Password: password
 
+################################################################################
 # END OF FILE
+################################################################################

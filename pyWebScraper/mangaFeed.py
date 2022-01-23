@@ -126,12 +126,12 @@ class clsMangaFeed(Session):
       # Get today date
       today = str(datetime.datetime.today().date())
       # When Manga Feed contains today information
-      if not str(today) in extern.gMangaFeed:
+      if not today in extern.gMangaFeed:
         # Reset Manga Feed
         extern.gMangaFeed = {}
-        extern.gMangaFeed[str(today)] = {}
-        extern.gMangaFeed[str(today)]['new'] = []
-        extern.gMangaFeed[str(today)]['notified'] = []
+        extern.gMangaFeed[today] = {}
+        extern.gMangaFeed[today]['new'] = []
+        extern.gMangaFeed[today]['notified'] = []
       # When Manga Feed does not contain today information
       else:
         pass
@@ -154,9 +154,9 @@ class clsMangaFeed(Session):
           # Get chapter URL
           chapter_url = '{}{}-chapter-{}.html'.format(_url, indexName, chapter)
           # When entry is not notified
-          if not chapter_url in extern.gMangaFeed[str(today)]['notified']:
+          if not chapter_url in extern.gMangaFeed[today]['notified']:
             # Append chapter URL to Manga Feed
-            extern.gMangaFeed[str(today)]['new'].append(chapter_url)
+            extern.gMangaFeed[today]['new'].append(chapter_url)
           # When entry is notified
           else:
             pass

@@ -54,6 +54,9 @@ injectLock  = asyncio.Lock()
 # Manga Subscription Feed
 gMangaFeed = {}
 
+# Constant variable
+DISCORD_CHANNEL_SERVER = 'server'
+DISCORD_THADDEUS_CRANE_ID = 931809914559533096
 ################################################################################
 # END OF FILE
 ################################################################################

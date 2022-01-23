@@ -61,6 +61,9 @@ from pyDiscordBot import DiscordBot
 from pyNotificationManager import *
 from pyWebScraper import MangaFeed
 
+# Get gloabel variable
+TOKEN = extern.gConfig['discord']['bot']['token']
+
 # Declare object
 Alfred = DiscordBot()
 MF_WebScraper = MangaFeed()
@@ -77,7 +80,9 @@ def main() -> None:
     Alfred.loop.create_task(continousMangaFeed()) 
     Alfred.loop.create_task(loopNotificationCheck())
     # Start Alfred service
-    Alfred.PermanentStart()
+    # ALWAYS INVOKE AT THE END OF PROGRAM
+    # ALL CALLS AFTER ITS INVOCATION ARE BLOCKED.
+    Alfred.run(TOKEN)
   # Catch Keyboard Interrupt
   except KeyboardInterrupt:
     pass

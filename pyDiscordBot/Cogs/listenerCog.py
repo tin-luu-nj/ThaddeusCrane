@@ -67,7 +67,8 @@ class clsListenerCog(commands.Cog):
     # In case guild is available
     if extern.DiscordGuild is not None:
       # Get channel 'server'
-      channel = disnakeGet(extern.DiscordGuild.text_channels, name='server')
+      channel = disnakeGet(extern.DiscordGuild.text_channels,
+        name=extern.DISCORD_CHANNEL_SERVER)
       # Send message to Discord Guild to notify Cog is ready
       await channel.send(f'[NTFY]\ton-ready: Event Cog\n')
     # Set CogReady to True
@@ -85,7 +86,7 @@ class clsListenerCog(commands.Cog):
     # Refer sent msg list to local variable
     lMsgBufferList = extern.DiscordDeliveredMsg
     # Check if message is sent by Bot
-    if 931809914559533096 == message.author.id and self.CogReady:
+    if extern.DISCORD_THADDEUS_CRANE_ID == message.author.id and self.CogReady:
       # Append sent msg
       lMsgBufferList.append(message.content)
 

@@ -28,6 +28,9 @@
 # Copyright (c) 2022 Pennyworth Project.  All rights reserved.
 ################################################################################
 
+# Get shared variable across modules
+from pyExtern import extern
+
 # Import open-source Library
 from disnake.utils import get      as disnakeGet
 from disnake.ext   import commands
@@ -56,12 +59,11 @@ class clsCommandCog(commands.Cog):
     """
     # Print information of Discord Cog to console
     print(f'[INF] on-ready: Command Cog')
-    # Get Discord Guild
-    guild = disnakeGet(self.bot.guilds, name='TheNest')
     # In case guild is available
-    if guild is not None:
+    if extern.DiscordGuild is not None:
       # Get channel 'server'
-      channel = disnakeGet(guild.text_channels, name='server')
+      channel = disnakeGet(extern.DiscordGuild.text_channels,
+        name=extern.DISCORD_CHANNEL_SERVER)
       # Send message to Discord Guild to notify Cog is ready
       await channel.send(f'[NTFY]\ton-ready: Command Cog\n')
 

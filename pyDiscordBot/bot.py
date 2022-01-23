@@ -45,12 +45,7 @@ import asyncio
 
 # Import open-source Library
 from disnake.ext import commands
-from disnake.utils import get as dGet
-
-# Get global configuration
-env = extern.gConfig
-TOKEN = env['discord']['bot']['token']
-GUILD = env['discord']['bot']['guild']
+from disnake.utils import get as disnakeGet
 
 class clsBot(commands.Bot):
   """! The Discord Bot base class.
@@ -81,8 +76,10 @@ class clsBot(commands.Bot):
     @param  None.
     @return  None.
     """
+    # Get global variable Guild name
+    DISCORD_GUILD = extern.gConfig['discord']['bot']['guild']
     # Set global variable Guild
-    extern.DiscordGuild = dGet(self.guilds, name=GUILD)
+    extern.DiscordGuild = disnakeGet(self.guilds, name=DISCORD_GUILD)
     # Print information of Discord Bot and Guild to console
     print(
       f'[INF] {self.user} is connected to the following guild:\n'
@@ -90,24 +87,14 @@ class clsBot(commands.Bot):
     )
     # Get channel 'server' in Discord Guild
     if extern.DiscordGuild is not None:
-      channel = dGet(extern.DiscordGuild.text_channels, name='server')
+      channel = disnakeGet(extern.DiscordGuild.text_channels,
+        name=extern.DISCORD_THADDEUS_CRANE_ID)
     else:
       pass
     # Send message to Discord Guild to notify Bot is online
     await channel.send(f'[NTFY]\tAlfred is at your service!\n')
     # Set global variable Ready to True
     extern.DiscordBotReady = True
-
-  def PermanentStart(self) -> None:
-    """! Method to start Discord Bot loop initialisation.
-    NOTE: ALWAYS INVOKE AT THE END OF PROGRAM,
-    ALL CALLS AFTER ITS INVOCATION ARE BLOCKED.
-
-    @param  None.
-    @return  None.
-    """
-    # Event loop initialisation
-    self.run(TOKEN)
 
   async def async_cleanup(self) -> None:
     """! Coroutine for clean up.
@@ -128,7 +115,8 @@ class clsBot(commands.Bot):
     await self.async_cleanup()
     # Get Discord channel 'server
     if extern.DiscordGuild is not None:
-      channel = dGet(extern.DiscordGuild.text_channels, name='server')
+      channel = disnakeGet(extern.DiscordGuild.text_channels,
+        name=extern.DISCORD_THADDEUS_CRANE_ID)
     # Send message to Discord Guild to notify Bot is online
     await channel.send(f'[NTFY]\tAlfred is offline!\n')
     # Close class instance
@@ -159,7 +147,7 @@ class clsBot(commands.Bot):
               # Loop through each channel
               for chnlNm in ntfy:
                 # Get channel
-                chnl = dGet(extern.DiscordGuild.text_channels, name=chnlNm)
+                chnl = disnakeGet(extern.DiscordGuild.text_channels, name=chnlNm)
                 # Loop through each message
                 for msg in ntfy[chnlNm]:
                   # Send message to Discord Channel

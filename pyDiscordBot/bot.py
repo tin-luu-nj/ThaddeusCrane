@@ -88,7 +88,7 @@ class clsBot(commands.Bot):
     # Get channel 'server' in Discord Guild
     if extern.DiscordGuild is not None:
       channel = disnakeGet(extern.DiscordGuild.text_channels,
-        name=extern.DISCORD_THADDEUS_CRANE_ID)
+        name=extern.DISCORD_CHANNEL_SERVER)
     else:
       pass
     # Send message to Discord Guild to notify Bot is online
@@ -116,7 +116,7 @@ class clsBot(commands.Bot):
     # Get Discord channel 'server
     if extern.DiscordGuild is not None:
       channel = disnakeGet(extern.DiscordGuild.text_channels,
-        name=extern.DISCORD_THADDEUS_CRANE_ID)
+        name=extern.DISCORD_CHANNEL_SERVER)
     # Send message to Discord Guild to notify Bot is online
     await channel.send(f'[NTFY]\tAlfred is offline!\n')
     # Close class instance

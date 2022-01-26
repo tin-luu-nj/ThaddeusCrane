@@ -24,6 +24,7 @@
 # Example description:
 # Version Y-M-D       Author      Change description
 # 1.0.0   2022-01-22  Tin Luu     Initial Version
+# 1.0.1   2022-01-26  Tin Luu     Initial Version
 #
 # Copyright (c) 2022 Pennyworth Project.  All rights reserved.
 ################################################################################
@@ -77,7 +78,36 @@ class clsCommandCog(commands.Cog):
     @return  None.
     """
     # Send message to Discord Guild to notify Bot is online
-    await ctx.channel.send(f'[NTFY]\tHi {ctx.author.mention}, Alfred is still online')
+    await ctx.channel.send(f'Hi {ctx.author.mention},\nAlfred is still online')
+
+  # Decorator that marks a function execute when command enter
+  @commands.command(pass_context=True)
+  # status command
+  async def anydesk(self, ctx, arg) -> None:
+    """! Coroutine !anydesk command.
+
+    @param[in] ctx - Context in which a command is being invoked under.
+    @return  None.
+    """
+    result = extern.fDict['cmdAnyDesk'](arg)
+    if result:
+      await ctx.channel.send(f'Hi {ctx.author.mention}, \
+        ```{ctx.message.content}\n>>> {result}```')
+    else:
+      pass
+
+  @commands.Cog.listener()
+  async def on_command_error(self, ctx, error):
+    """! Command Error event.
+
+    @param[in] ctx - Context in which a command is being invoked under.
+    @param[in] error - Error of command
+    @return  None.
+    """
+    if isinstance(error, commands.errors.MissingRequiredArgument):
+      await ctx.send("A parameter is missing")
+    else:
+      pass
 
 def setup(bot) -> None:
   """! Method to setup Cog for Bot when loading.

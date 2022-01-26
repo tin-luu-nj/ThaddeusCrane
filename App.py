@@ -60,6 +60,7 @@ with open('./config/Alfred.yml', 'r') as stream:
 from pyDiscordBot import DiscordBot
 from pyNotificationManager import *
 from pyWebScraper import MangaFeed
+from cmdScript import cmdAnyDesk
 
 # Get gloabel variable
 TOKEN = extern.gConfig['discord']['bot']['token']
@@ -75,6 +76,12 @@ def main() -> None:
   @param  None.
   @return  None.
   """
+  # Initialize function dictionary
+  if 'cmdAnyDesk' in extern.fDict:
+    extern.fDict['cmdAnyDesk'] = cmdAnyDesk
+  else:
+    pass
+
   try:
     # Create Task for Alfred
     Alfred.loop.create_task(continousMangaFeed()) 

@@ -27,7 +27,14 @@
 ################################################################################
 
 # Import standard library
-import asyncio
+import asyncio, ctypes, os
+
+from cmdScript.cmd import cmdAnyDesk
+
+try:
+  IS_ADMIN = os.getuid() == 0
+except AttributeError:
+  IS_ADMIN = ctypes.windll.shell32.IsUserAnAdmin() != 0
 
 # gConfig contains user-configuration
 gConfig = {}
@@ -57,6 +64,15 @@ gMangaFeed = {}
 # Constant variable
 DISCORD_CHANNEL_SERVER = 'server'
 DISCORD_THADDEUS_CRANE_ID = 931809914559533096
+
+def dummyHandler(*args, **kwargs):
+  print('[DBG] DUMMY HANDLER')
+
+# Function Dictionay
+fDict = {
+  "cmdAnyDesk": dummyHandler
+}
+
 ################################################################################
 # END OF FILE
 ################################################################################

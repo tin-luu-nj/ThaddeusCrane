@@ -1,0 +1,65 @@
+@ECHO OFF
+
+SET PARAM=%1
+SET ANYDESK="C:\Program Files (x86)\AnyDesk\AnyDesk.exe"
+
+IF NOT DEFINED PARAM (
+  ECHO MISSING ARGUMENT
+  GOTO:EOF
+)
+
+IF GET-ID==%PARAM% (
+  FOR /f "delims=" %%i IN ('%ANYDESK% --get-id') DO SET CID=%%i
+  GOTO:RETURN
+)
+
+IF GET-ALIAS==%PARAM% (
+  FOR /f "delims=" %%i IN ('%ANYDESK% --get-alias') DO SET CID=%%i
+  GOTO:RETURN
+)
+
+IF GET-STATUS==%PARAM% (
+  FOR /f "delims=" %%i IN ('%ANYDESK% --get-status') DO SET CID=%%i
+  GOTO:RETURN
+)
+
+IF SERVICE-START==%PARAM% (
+  %ANYDESK% --start-service
+  SET CID=CMD_OK
+  GOTO:RETURN
+)
+
+IF SERVICE-STOP==%PARAM% (
+  %ANYDESK% --stop-service
+  SET CID=CMD_OK
+  GOTO:RETURN
+)
+
+IF SERVICE-RESTART==%PARAM% (
+  %ANYDESK% --restart-service
+  SET CID=CMD_OK
+  GOTO:RETURN
+)
+
+@REM TODO
+@REM RESERVED COMMAND ARGUMENT
+IF PASSWORD-SET==%PARAM% (
+  ECHO %2 | %ANYDESK% --set-password
+  GOTO:RETURN
+)
+
+@REM TODO
+@REM RESERVED COMMAND ARGUMENT
+IF PASSWORD-REMOVE==%PARAM% (
+  %ANYDESK% --remove-password
+  GOTO:EOF
+)
+
+:RETURN
+IF DEFINED CID (
+  ECHO %CID%
+) ELSE (
+  ECHO CMD_NG
+)
+
+:EOF

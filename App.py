@@ -61,6 +61,8 @@ from pyDiscordBot import DiscordBot
 from pyNotificationManager import *
 from pyWebScraper import MangaFeed
 from cmdScript import cmdAnyDesk
+import pyDiscordBot.Cogs.cmdCog
+import pyDiscordBot.Cogs.listenerCog
 
 # Get gloabel variable
 TOKEN = extern.gConfig['discord']['bot']['token']
@@ -113,7 +115,10 @@ async def continousMangaFeed() -> None:
       # Get today date
       today = str(datetime.datetime.today().date())
       # Check Manga Feed
-      await MF_WebScraper.checkFeed()
+      try:
+        await MF_WebScraper.checkFeed()
+      except:
+        pass
       # When there is new feed
       if extern.gMangaFeed[today]['new']:
         # If new feed is subset of notified feed
